@@ -1,0 +1,43 @@
+*{
+    overflow: hidden;
+}
+
+
+ion-content{
+    --background: url(../../assets/img/bg1.jpeg) center no-repeat;
+    background-size: cover;
+}
+
+
+
+.bg
+{
+ // position: relative;
+//   --background: url('../../assets/img/bg1.jpeg') no-repeat center center fixed;
+//       background-size: cover;    
+      
+      
+}
+
+
+.bg1{
+    --background:transparent;
+    margin-top: 30%;
+    
+}
+
+.card-has-background-image {
+    .card-text { 
+        padding-left: 8px; 
+        padding-right: 8px; 
+        &.is-vertically-centered {
+            position: absolute;
+            transform: translateY(-50%);
+            top: 50%;
+            width: 100%;
+            > div {
+                position: relative; 
+            }
+        }
+    }
+}

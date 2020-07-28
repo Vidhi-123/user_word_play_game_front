@@ -1,0 +1,9 @@
+{
+  "name": "word_app",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "a0f2825f"
+}

@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg" >
+  
+  <div>
+
+    <ion-item [hidden]="!flag" class="bg1" style="width: 50%; margin-left:20%;">
+      <ion-label position="floating" style="color: white;">Enter Age</ion-label>
+      <ion-input  type="text" [(ngModel)]="age"></ion-input>
+    </ion-item>
+
+    <ion-button [hidden]="!flag" type="button" (click)="onAgeCheck()">Age Check</ion-button>
+  
+  <ion-slides *ngIf="word_list1.length>0"  scrollbar="true" style="height:65vh;" #mySlider autoplay="5" loop="true" speed="5" (ionSlidesDidLoad)="slidesDidLoad(mySlider)">
+    <ion-slide *ngFor="let items of word_list1">
+      <ion-card style="height: 50%; width:80%;" (click)="navigated_fun(items)">
+        <ion-card-header>
+        
+          <ion-card-title style="padding-top:20%;">{{items.w_name}}</ion-card-title>
+          <ion-card-subtitle style="text-align: right;">Rating : {{items.w_rating}}</ion-card-subtitle> 
+        </ion-card-header>
+      </ion-card>
+    </ion-slide>
+
+
+    
+
+  </ion-slides>
+</div>
+  
+</ion-content>
