@@ -1,0 +1,55 @@
+<ion-header>  
+  <ion-toolbar >  
+    <ion-buttons slot="start">  
+      <ion-menu-button color="dark"></ion-menu-button>   
+    </ion-buttons>  
+    <ion-title>  
+      Registration
+    </ion-title>  
+  </ion-toolbar>   
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <ion-item lines="full">
+      <ion-label position="floating">Full Name</ion-label>
+      <ion-input type="text" [(ngModel)]="name" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email_id" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">User Name</ion-label>
+      <ion-input type="text" [(ngModel)]="user_name" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Birth Date</ion-label><br>
+      <ion-input type="date" [(ngModel)]="date_of_birth" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Confirm Password</ion-label>
+      <ion-input type="password" [(ngModel)]="cnfpassword" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">OTP</ion-label>
+      <ion-input type="text" [(ngModel)]="otp" required></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block" (click)="onRegister()">Sign Up</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, AlertController, MenuController } from '@ionic/angular';
 import { WordService } from '../service/word.service';
 import { word_class } from '../classes/word_class';
 import { PopoverController } from '@ionic/angular';
@@ -14,68 +14,206 @@ import { Router } from '@angular/router';
 export class Tab1Page {
   word_list:word_class[]=[];
   word_list1:word_class[]=[];
+  choice:string;
   slider: IonSlides;
   stars:number=5;
-  age:number;
+  age:string;
   flag:boolean=true;
+  slideshow:IonSlides;
 
-  constructor(public _ser:WordService,private router:Router,public popoverController: PopoverController) {}
-
-  // async presentPopover(item:word_class,ev: any) {
-  //   console.log(item);
-  //   localStorage.setItem("w_name",item.w_name);
-  //   const popover = await this.popoverController.create({
-  //     component: Tab3Page,
-  //     cssClass: 'my-custom-class',
-  //     event: ev,
-  //     translucent: true
-  //   });
-  //   return await popover.present();
-  // }
+  constructor(public _ser:WordService,private router:Router,private menu: MenuController,public popoverController: PopoverController) {}
 
 
-  onAgeCheck()
-  {
-    console.log(this.age);
-    if(this.age>18)
-    {
-      this.word_list1=this.word_list;
-      console.log(this.word_list1);
-      this.flag=false;
-    }
-    else{
-      for(let h=0;h<this.word_list.length;h++)
-      {
-        if(this.word_list[h].is_adult!=true)
-        {
-          this.word_list1.push(this.word_list[h]);
-        }
-        if(h==this.word_list.length-1)
-        {
-          this.flag=false;
-          console.log(this.word_list1);
-        }
-      }
-    }
-    
+  openFirst() {
+    console.log("hey");
+    this.menu.enable(true, 'first');
+    this.menu.open('first');
   }
 
+  onsortselect()
+  {
+    console.log(this.choice);
+    this.word_list1=[];
+    if(this.choice=='asc')
+    {
+      this._ser.getWordsByName().subscribe(
+        (data:word_class[])=>{
+          console.log(data);
+          if(this.age=='A')
+        {
+          for(let i=0;i<data.length;i++)
+          {
+            console.log(data[i].word_name.search('-'));
+            if(data[i].word_name.search('-')!=-1)
+            {
+              this.word_list1.push(data[i]);
+            }
+          }
+        }
+        else
+        {
+          for(let i=0;i<data.length;i++)
+          {
+            if(data[i].is_adult==false && data[i].word_name.search('-')!=-1)
+            {
+              this.word_list1.push(data[i]);
+            }
+          }
+        }
+        }
+      )
+    }
+    else if(this.choice=="desc")
+    {
+      this._ser.getWordsByNameDesc().subscribe(
+        (data:word_class[])=>{
+          console.log(data);
+          if(this.age=='A')
+        {
+          for(let i=0;i<data.length;i++)
+          {
+            console.log(data[i].word_name.search('-'));
+            if(data[i].word_name.search('-')!=-1)
+            {
+              this.word_list1.push(data[i]);
+            }
+          }
+        }
+        else
+        {
+          for(let i=0;i<data.length;i++)
+          {
+            if(data[i].is_adult==false && data[i].word_name.search('-')!=-1)
+            {
+              this.word_list1.push(data[i]);
+            }
+          }
+        }
+        }
+      )
+    }
+    else if(this.choice=="d_t")
+    {
+      
+      this._ser.getWordsBydateTime().subscribe(
+        (data:word_class[])=>{
+          console.log(data);
+          if(this.age=='A')
+        {
+          for(let i=0;i<data.length;i++)
+          {
+            console.log(data[i].word_name.search('-'));
+            if(data[i].word_name.search('-')!=-1)
+            {
+              this.word_list1.push(data[i]);
+            }
+          }
+        }
+        else
+        {
+          for(let i=0;i<data.length;i++)
+          {
+            if(data[i].is_adult==false && data[i].word_name.search('-')!=-1)
+            {
+              this.word_list1.push(data[i]);
+            }
+          }
+        }
+        }
+      )
+    }
+
+    else if(this.choice=="r_t")
+    {
+      this._ser.getWordsByRating().subscribe(
+        (data:word_class[])=>{
+          console.log(data);
+          if(this.age=='A')
+        {
+          for(let i=0;i<data.length;i++)
+          {
+            console.log(data[i].word_name.search('-'));
+            if(data[i].word_name.search('-')!=-1)
+            {
+              this.word_list1.push(data[i]);
+            }
+          }
+        }
+        else
+        {
+          for(let i=0;i<data.length;i++)
+          {
+            if(data[i].is_adult==false && data[i].word_name.search('-')!=-1)
+            {
+              this.word_list1.push(data[i]);
+            }
+          }
+        }
+        }
+      )
+    }
+    
+      
+  }
 
   navigated_fun(item:word_class)
   {
-    localStorage.setItem("w_name",item.w_name);
+    localStorage.setItem('word_id',item.id.toString());
     this.router.navigate(['tabs/tab3']);
+
+  }
+
+  onLogOut()
+  {
+    console.log("clear");
+    localStorage.clear();
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("word_id");
+    console.log(localStorage.getItem("user_id"));
 
   }
  
   ngOnInit() {
+    this.word_list1=[];
+   
+    this.age=localStorage.getItem('age');
+
     this._ser.getAllWord().subscribe(
       (data:word_class[])=>{
         console.log(data);
-        this.word_list=data;
+        if(this.age=='A')
+        {
+          for(let i=0;i<data.length;i++)
+          {
+            console.log(data[i].word_name.search('-'));
+            if(data[i].word_name.search('-')!=-1)
+            {
+              this.word_list1.push(data[i]);
+            }
+          }
+        }
+        else
+        {
+          for(let i=0;i<data.length;i++)
+          {
+            if(data[i].is_adult==false && data[i].word_name.search('-')!=-1)
+            {
+              this.word_list1.push(data[i]);
+            }
+          }
+        }
       }
     )
     
+  }
+  public ionViewWillLeave()
+  {
+    this.slider.stopAutoplay();
+  }
+  public ionViewWillEnter()
+  {
+    this.slider.startAutoplay();
+    this.ngOnInit();
   }
   slidesDidLoad(mySlider: IonSlides)
   {

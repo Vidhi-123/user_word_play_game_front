@@ -1,56 +1,50 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Add Word
-    </ion-title>
-  </ion-toolbar>
+<ion-header>  
+  <ion-toolbar >  
+    <ion-buttons slot="start">  
+      <ion-menu-button color="dark"></ion-menu-button>   
+    </ion-buttons>  
+    <ion-title>  
+ Add word
+    </ion-title>  
+  </ion-toolbar>   
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
+  <ion-row>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>First Word</mat-label>
+        <input matInput placeholder="Add meaning full word" [(ngModel)]="first_word">
+        
+      </mat-form-field>
+      <span id="ferror" style="color:red"></span>
+      <br>
+  </ion-row>
+
+  
+
+  <ion-row>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Second word</mat-label>
+        <input matInput placeholder="Add meaningfull word"  [(ngModel)]="second_word">
+        
+      </mat-form-field>
+      <span id="serror" style="color:red"></span>
+    
+    
+  </ion-row>
+
+  
+
   <ion-item>
-    <ion-label position="floating">Enter First Word</ion-label>
-    <ion-input [disabled]="flag" type="text" [(ngModel)]="first_word"></ion-input>
-  </ion-item>
-
-
-
-  <ion-item>
-    <ion-label position="floating">Enter Second Word</ion-label>
-    <ion-input [disabled]="flag" type="text" [(ngModel)]="second_word"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>please select adult if you are above 18 or select below adult</ion-label>
-    <ion-select placeholder="Select One" [(ngModel)]="sel" [disabled]="flag">
-      <ion-select-option value="adult">Adult</ion-select-option>
-      <ion-select-option value="notadult">Not Adult</ion-select-option>
+    <ion-label>Is Adult</ion-label>
+    <ion-select placeholder="Select One" [(ngModel)]="is_adult">
+      <ion-select-option value="1">Yes</ion-select-option>
+      <ion-select-option value="0">No</ion-select-option>
     </ion-select>
   </ion-item>
 
+  <button mat-raised-button color="primary" (click)="onAdd()">Add word</button>
 
-  <ion-button [disabled]="flag" type="button" (click)="check_availablity()">Check Availablity</ion-button>
-
-  <ion-item>
-    <ion-label position="floating">Enter Name</ion-label>
-    <ion-input type="text" [disabled]="!flag" [(ngModel)]="name"></ion-input>
-  </ion-item>
-
-
-
-  <ion-item>
-    <ion-label position="floating">Enter Email id</ion-label>
-    <ion-input type="email" [disabled]="!flag" [(ngModel)]="email_id"></ion-input>
-  </ion-item>
-
-
-  <ion-item>
-    <ion-label>Birthyear</ion-label>
-    <ion-datetime displayFormat="YYYY" [disabled]="!flag" [(ngModel)]="myDate"></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Enter Zipcode</ion-label>
-    <ion-input type="text" [disabled]="!flag" [(ngModel)]="zipcode"></ion-input>
-  </ion-item>
-  <ion-button type="button" [disabled]="!flag" (click)="add_word()">Add Word</ion-button>
-  
 </ion-content>

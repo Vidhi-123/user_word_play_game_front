@@ -1,0 +1,62 @@
+<ion-header>  
+  <ion-toolbar >  
+    <ion-buttons slot="start">  
+      <ion-menu-button color="dark"></ion-menu-button>   
+    </ion-buttons>  
+    <ion-title>  
+    Add Existing Word
+    </ion-title>  
+  </ion-toolbar>   
+</ion-header>
+
+<ion-content>
+  <ion-searchbar (ionChange)="f1($event)" showCancelButton="always"></ion-searchbar>
+
+  <ion-list>
+   
+      <!-- <mat-accordion *ngFor="let item of words  | filtro:textobuscar">
+
+      <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{item.word_name}}
+      </mat-panel-title>
+   
+    </mat-expansion-panel-header>
+    <mat-form-field class="example-full-width">
+      <mat-label>Word</mat-label>
+      <input matInput  [(ngModel)]="word" placeholder="Word" (blur)="first_check()" (keydown)="onkey($event)">
+      <span id="ferror" style="color:red"></span>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="onClick(item)">Add Word</button>
+  </mat-expansion-panel>
+  <br>
+
+</mat-accordion> -->
+
+
+<mat-accordion>
+  
+  <mat-expansion-panel (opened)="onexpand()" *ngFor="let item of words | filtro:textobuscar">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{item.word_name}}
+      </mat-panel-title>
+      
+    </mat-expansion-panel-header>
+    <mat-form-field class="example-full-width">
+      <mat-label>Word</mat-label>
+      <input matInput  [(ngModel)]="word" placeholder="Please enter meaningfull Word">
+    </mat-form-field>
+    <span style="color: red;display: block;">{{errormsg}}</span>
+    
+    <button mat-raised-button color="primary" [hidden]="d_flag" [disabled]="word.length==0" (click)="onClickCheck(i)">Check Word</button>
+    <button mat-raised-button color="primary" [hidden]="!d_flag" (click)="onClick(item)">Add Word</button>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+
+    
+  </ion-list>
+</ion-content>

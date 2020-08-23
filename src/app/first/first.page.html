@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>first</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card style=" margin-top: 30%;">
+    <ion-card-header>
+  
+      <ion-card-subtitle>Please select according to your age</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      
+      <ion-radio-group (ionChange)="onselectradio($event)">
+        
+        <ion-item>
+          <ion-label>Above 18</ion-label>
+          <ion-radio   name="age" value="A"  ></ion-radio>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Below 18</ion-label>
+          <ion-radio  name="age" value="UA"></ion-radio>
+        </ion-item>
+
+      </ion-radio-group>
+
+      <div *ngIf="flag">
+      <h2>*Terms & Conditions Applied</h2>
+
+      <h3>As you have selected above 18 you are eligible to watch restricted content</h3>
+      
+      <input type="checkbox" color="primary" id="chk" (click)="onclickchk()">  I Agree!
+        </div>
+        <ion-button [disabled]="flag1" (click)="onClickConfirm()">Confirm Age</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

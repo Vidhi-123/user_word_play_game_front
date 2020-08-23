@@ -8,6 +8,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {FormsModule} from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PipesModule } from './pipes/pipes.module';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -19,7 +24,14 @@ import { AppComponent } from './app.component';
     IonicModule.forRoot(),
      AppRoutingModule,
      HttpClientModule,
-     FormsModule
+     PipesModule,
+     FormsModule,
+     MatExpansionModule,
+     MatInputModule,
+     MatButtonModule,
+     
+     
+     BrowserAnimationsModule
      
    
     ],

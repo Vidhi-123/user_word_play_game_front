@@ -1,5 +1,5 @@
 export class word_class{
-    constructor(public u_id:number,public w_name:string,public w_rating:number,public w_rating_count:number,public is_adult:boolean,public w_id?:number){
+    constructor(public id:number,public word_name:string,public is_adult:boolean,public date_time?:Date,public word_id?:number){
 
     }
 }

@@ -1,35 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Rating
-    </ion-title>
-  </ion-toolbar>
+<ion-header>  
+  <ion-toolbar >  
+    <ion-buttons slot="start">  
+      <ion-menu-button color="dark"></ion-menu-button>   
+    </ion-buttons>  
+    <ion-title>  
+     Rating
+    </ion-title>  
+  </ion-toolbar>   
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <h2 *ngIf="user_word!=null">{{user_word.w_name}}</h2>
-  <h3 *ngIf="user_word!=null">By:-{{user_word.u_name}}</h3>
-  <h4 *ngIf="user_word!=null">{{user_word.w_rating}}</h4>
-  
+  <div *ngFor="let item of user_word_details;let i=index">
+  <h2 *ngIf="user_word_details!=null">Word  : {{item.word_name}}</h2>
+  <h3 *ngIf="user_word_details!=null">Author  : {{item.name}}</h3>
+  <h4 *ngIf="item.rating_avg!=0">Average rating  : {{item.rating_avg}}</h4>
+  <h4 *ngIf="item.rating_avg!=0 ">Rating count: {{item.rating_count}}</h4>
   <ion-card>
     <ion-card-content>
         <ion-item lines="none">
             
-            <ion-label style="display: inline;"><ion-icon id="one"  name="{{star>=1 ? 'star' : 'star-outline'}}" (click)="onclickStar(1)"></ion-icon></ion-label>  
-              <ion-label style="display: inline;"><ion-icon id="two" name="{{star>=2 ? 'star' : 'star-outline'}}" (click)="onclickStar(2)" ></ion-icon></ion-label>
-              <ion-label style="display: inline;"><ion-icon id="three" name="{{star>=3 ? 'star' : 'star-outline'}}" (click)="onclickStar(3)"></ion-icon></ion-label>  
-              <ion-label style="display: inline;"><ion-icon id="four" name="{{star>=4 ? 'star' : 'star-outline'}}" (click)="onclickStar(4)"></ion-icon></ion-label>
-              <ion-label style="display: inline;"><ion-icon id="five" name="{{star>=5 ? 'star' : 'star-outline'}}" (click)="onclickStar(5)"></ion-icon></ion-label>
+            <ion-label style="display: inline;"><ion-icon  id="one"  name="{{item.star>=1 ? 'star' : 'star-outline'}}"   (click)="onclickStar(1,item,i)"></ion-icon></ion-label>  
+            <ion-label style="display: inline;"><ion-icon  id="two" name="{{item.star>=2 ? 'star' : 'star-outline'}}" (click)="onclickStar(2,item,i)" ></ion-icon></ion-label>
+              <ion-label style="display: inline;"><ion-icon  id="three" name="{{item.star>=3 ? 'star' : 'star-outline'}}" (click)="onclickStar(3,item,i)"></ion-icon></ion-label>  
+              <ion-label style="display: inline;"><ion-icon  id="four" name="{{item.star>=4 ? 'star' : 'star-outline'}}" (click)="onclickStar(4,item,i)"></ion-icon></ion-label>
+              <ion-label style="display: inline;"><ion-icon  id="five" name="{{item.star>=5 ? 'star' : 'star-outline'}}" (click)="onclickStar(5,item,i)"></ion-icon></ion-label>
          </ion-item>
     </ion-card-content>
 </ion-card>
   
-
+</div>
 
 </ion-content>
-
-
-
 
 
 

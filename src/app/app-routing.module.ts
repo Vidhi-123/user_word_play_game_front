@@ -7,10 +7,26 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path:'tab3',
-    loadChildren: './tab3/tab3.module#Tab3PageModule'
-
-  }
+    path: 'first',
+    loadChildren: () => import('./first/first.module').then( m => m.FirstPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'registration',
+    loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'existing',
+    loadChildren: () => import('./existing/existing.module').then( m => m.ExistingPageModule)
+  },
+  
 ];
 @NgModule({
   imports: [
