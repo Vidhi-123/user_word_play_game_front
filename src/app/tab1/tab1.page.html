@@ -4,8 +4,11 @@
       <ion-menu-button color="dark"></ion-menu-button>   
     </ion-buttons>  
     <ion-title>  
-      Ionic Menu  Example
-    </ion-title>  
+      Word Game
+    </ion-title> 
+    <ion-buttons slot="end">  
+      <ion-icon name="logo-usd"></ion-icon> {{coin}}
+    </ion-buttons> 
   </ion-toolbar>   
 </ion-header>
 
@@ -31,7 +34,7 @@
   
 
   
-  <ion-slides *ngIf="word_list1.length>0"  scrollbar="true" style="height:65vh;" #mySlider autoplay="5" loop="true" speed="5" (ionSlidesDidLoad)="slidesDidLoad(mySlider)">
+  <ion-slides *ngIf="word_list1.length>0" [options]="slideOpts"  scrollbar="true" style="height:65vh;" #mySlider autoplay="5" loop="true" speed="5" (ionSlidesDidLoad)="slidesDidLoad(mySlider)" (ionSlideTouchEnd)="slideChanged(mySlider)">
     <ion-slide *ngFor="let items of word_list1">
       <ion-card style="height: 50%; width:80%;background-color: transparent; box-shadow: none;" (click)="navigated_fun(items)">
         <ion-card-header>
@@ -41,6 +44,8 @@
         </ion-card-header>
       </ion-card>
     </ion-slide>
+
+    
 
 
 

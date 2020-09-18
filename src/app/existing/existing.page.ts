@@ -7,6 +7,8 @@ import { rating_class } from '../classes/rating_class';
 import { UserwordService } from '../service/userword.service';
 import { user_word_class } from '../classes/user_word_class';
 import { Validators, FormControl } from '@angular/forms';
+import { UserService } from '../service/user.service';
+import { user_type_class } from '../tab2/tab2.page';
 
 @Component({
   selector: 'app-existing',
@@ -29,7 +31,7 @@ emailFormControl = new FormControl('', [
 ]);
 
 
-  constructor(private Router:Router,private ser2:UserwordService,private ser:WordService,private ser1:RatingService) { }
+  constructor(private Router:Router,private ser2:UserwordService,private ser:WordService,private ser1:RatingService,private user_ser:UserService) { }
 
 
 onexpand()
@@ -102,6 +104,31 @@ onClickCheck(x:number)
               this.ser.adduserword1(new user_word_class(this.user_id,data.insertId)).subscribe(
                 (data2:any)=>{
                   console.log(data2);
+                  this.ser.getCntAvgByWorduser(this.user_id).subscribe(
+                    (avg_res:any[])=>{
+                        console.log(avg_res[0]);
+                        this.ser.getWordsByUserId(this.user_id).subscribe(
+                          (word_cnt_res:any[])=>{
+                            console.log(word_cnt_res[0]);
+                            let user_type=Number(localStorage.getItem("user_type"));
+                            console.log(user_type);
+                            if(word_cnt_res[0].total_words>=20 && user_type==2 && avg_res[0].average_rating>=4)
+                            {
+                              alert("congo mithai bato good news hai!!");
+
+                              this.user_ser.updateUser(new user_type_class(this.user_id,3)).subscribe(
+                                (data4:any)=>{
+                                  console.log(data4);
+                                  localStorage.setItem("user_type",3+"");
+                                }
+                              );
+                            }
+
+                          }
+                        )
+                    }
+                    
+                  )
                 }
               );
 
@@ -110,6 +137,21 @@ onClickCheck(x:number)
                   console.log(data1);
                 }
               )
+
+              let user_type=Number(localStorage.getItem("user_type"));
+              console.log(user_type);
+              if(user_type==1)
+              {
+
+                this.user_ser.updateUser(new user_type_class(this.user_id,2)).subscribe(
+                  (data4:any)=>{
+                    console.log(data4);
+                    localStorage.setItem("user_type",2+"");
+                  }
+                );
+              }
+
+
 
               this.word="";
               this.errormsg="";

@@ -90,8 +90,35 @@ else{
               
               this._ser.addword(new word_class(data[0].max_id,this.first_word+" - "+this.second_word,this.is_adult)).subscribe(
                 (data1:any)=>{
+
                   this._ser.adduserword1(new user_word_class(this.user_id,data1.insertId)).subscribe(
                     (data2:any)=>{
+                      this._ser.getCntAvgByWorduser(this.user_id).subscribe(
+                        (avg_res:any[])=>{
+                            console.log(avg_res[0]);
+                            this._ser.getWordsByUserId(this.user_id).subscribe(
+                              (word_cnt_res:any[])=>{
+                                console.log(word_cnt_res[0]);
+                                let user_type=Number(localStorage.getItem("user_type"));
+                                console.log(user_type);
+                                if(word_cnt_res[0].total_words>=20 && user_type==2 && avg_res[0].average_rating>=4)
+                                {
+                                  alert("congo mithai bato good news hai!!");
+
+                                  this._ser1.updateUser(new user_type_class(this.user_id,3)).subscribe(
+                                    (data4:any)=>{
+                                      console.log(data4);
+                                      localStorage.setItem("user_type",3+"");
+                                    }
+                                  );
+                                }
+
+                              }
+                            )
+                        }
+                        
+                      )
+
                       console.log(data2);
                     }
                   );
@@ -102,9 +129,6 @@ else{
                     }
                   )
 
-
-
-
                   let user_type=Number(localStorage.getItem("user_type"));
                   console.log(user_type);
                   if(user_type==1)
@@ -113,6 +137,7 @@ else{
                     this._ser1.updateUser(new user_type_class(this.user_id,2)).subscribe(
                       (data4:any)=>{
                         console.log(data4);
+                        localStorage.setItem("user_type",2+"");
                       }
                     );
                   }
@@ -128,6 +153,8 @@ else{
   }
   onCheckSecond()
   {
+    this.s_flag=false;
+    this.flag=false;
     document.getElementById("serror").innerHTML="";
     console.log(this.second_word);
     let second_arr=this.second_word.split(" ");
@@ -173,6 +200,8 @@ else{
 
   onCheckFirst()
   {
+    this.flag1=false;
+    this.f_flag=false;
     document.getElementById("ferror").innerHTML="";
     console.log(this.first_word);
     let first_arr=this.first_word.split(" ");

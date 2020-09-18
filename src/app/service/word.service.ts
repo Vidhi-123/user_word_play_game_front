@@ -7,6 +7,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class WordService {
 
   private word_url:string="http://localhost:3000/word/";
+  private word_url_avg:string="http://localhost:3000/word/avg/";
+  private word_url_count:string="http://localhost:3000/word/cnt/";
   private word_user_url:string="http://localhost:3000/userword/";
   private url:string="https://api.dictionaryapi.dev/api/v2/entries/en/";
   private url1:string="http://localhost:3000/pattern/";
@@ -73,4 +75,13 @@ export class WordService {
   {
     return this._http.get(this.sort_url_rating);
   }
+  getCntAvgByWorduser(user_id)
+  {
+    return this._http.get(this.word_url_avg+user_id);
+  }
+  getWordsByUserId(user_id)
+  {
+    return this._http.get(this.word_url_count+user_id);
+  }
+
 }

@@ -35,11 +35,13 @@ export class AppComponent {
   }
   logoutClicked()
   {
+    this.menuCtrl.close();
     this.user_id=0;
     localStorage.clear();
   }
   loginClicked()
   {
+    this.menuCtrl.close();
     localStorage.setItem("url","tabs/tab1");
     
     this.router.navigate(['home']);

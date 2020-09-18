@@ -28,19 +28,21 @@ export class Tab3Page {
     user_id:number;
     rating_details:any;
 
-    onclickStar(rating:number,item:user_word_class,i:number)
+    onclickStar(rating:number,item:star_word,i:number)
     {
+      console.log(item.star);
+      
       if(item.user_id==this.user_id)
       {
         alert("You cannot rate your own word");
       }
       else{
-        if(this.star[i]==0)
+        if(item.star==0)
         {
           console.log(rating);
         console.log(item);
-        this.star[i]=rating;
-        console.log(this.star[i]);
+        item.star=rating;
+        console.log(item.star);
   
         this._ser2.deleteRatingByWordId(item.word_id).subscribe(
           (data:any)=>{
@@ -48,7 +50,7 @@ export class Tab3Page {
           }
         );
   
-          this._ser2.addRating(new rating_class(this.user_id,item.word_id,this.star[i])).subscribe(
+          this._ser2.addRating(new rating_class(this.user_id,item.word_id,item.star)).subscribe(
             (data:any)=>{
               console.log(data);
             }

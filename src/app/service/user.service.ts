@@ -8,6 +8,7 @@ import { user_class } from '../classes/user_class';
 })
 export class UserService {
 private url:string="http://localhost:3000/user/";
+private url2:string="http://localhost:3000/user/coin/"
 private url1:string="http://localhost:3000/user/login/";
   constructor(private _http:HttpClient) { }
 
@@ -35,5 +36,13 @@ private url1:string="http://localhost:3000/user/login/";
     let body=JSON.stringify(item);
     let head1=new HttpHeaders().set('Content-Type','application/json');
     return this._http.post(this.url,body,{headers:head1});
+ 
+  }
+
+  updateCoins(item)
+  {
+    let body=JSON.stringify(item);
+    let head1=new HttpHeaders().set('Content-Type','application/json');
+    return this._http.put(this.url2,body,{headers:head1});
   }
 }
